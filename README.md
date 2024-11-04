@@ -122,7 +122,7 @@ Di home.page.ts, buat fungsi logout() yang akan menghapus data autentikasi dan m
   this.authService.logout();
   this.router.navigate(['/login']);
 
-# 10. Ringkasan Proses Login dan Akses Rute\
+# 10. Ringkasan Proses Login dan Akses Rute
 
 - Login: Pengguna memasukkan username dan password di form login, kemudian AuthService memvalidasi data tersebut dengan API. Jika berhasil, data autentikasi disimpan dan pengguna diarahkan ke halaman beranda.
 - Akses Rute: AuthGuard memastikan hanya pengguna yang terautentikasi yang bisa mengakses halaman beranda, sementara AutoLoginGuard memastikan pengguna yang sudah login tidak dapat kembali ke halaman login.
