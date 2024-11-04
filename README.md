@@ -21,26 +21,26 @@ Shift Baru : C
 
 # B. Penjelasan Langkah untuk Proses Login :
 
-1. Menyiapkan Database dan API
+# 1. Menyiapkan Database dan API
 
 Database: Buat basis data yang akan menyimpan informasi pengguna, seperti username, email, dan password. Kamu bisa menggunakan tools seperti Laragon untuk setup database lokal.
 API: Buat API dengan PHP untuk mengelola autentikasi. Setidaknya dua file diperlukan:
 - koneksi.php: Menghubungkan aplikasi Ionic dengan database. File ini bertanggung jawab untuk koneksi antara aplikasi dan database, memastikan aplikasi bisa mengakses data di database.
 - login.php: Menangani proses DDL (Data Definition Language) dan DML (Data Manipulation Language), seperti pembuatan pengguna baru dan validasi data login dari pengguna.
 
-2. Membuat Project Ionic
+# 2. Membuat Project Ionic
 Gunakan perintah berikut untuk membuat project Ionic baru:
 
 - ionic start cobalogin blank --type=angular
   
 Pilih framework Angular dan template "blank" untuk memulai aplikasi kosong.
 
-3. Mengatur Preferences dengan Capacitor
+# 3. Mengatur Preferences dengan Capacitor
 Di direktori proyek, instal modul Capacitor Preferences untuk menyimpan data autentikasi secara lokal di perangkat pengguna:
 
 - npm i @capacitor/preferences
   
-4. Menambahkan HttpClient ke Project
+# 4. Menambahkan HttpClient ke Project
 
 Buka file app.module.ts dan daftarkan provideHttpClient. Ini memungkinkan aplikasi melakukan komunikasi HTTP (GET, POST, PUT, DELETE) ke API. Berikut adalah contoh cara menambahkan HttpClient ke provider:
 
@@ -52,7 +52,7 @@ Buka file app.module.ts dan daftarkan provideHttpClient. Ini memungkinkan aplika
 })
 export class AppModule {}
 
-5. Membuat Service Authentication
+# 5. Membuat Service Authentication
 
 Buat service dengan perintah:
 
@@ -69,7 +69,7 @@ Contoh fungsi login yang mengirim permintaan ke API:
 - login(username: string, password: string) {
   return this.http.post(`${apiUrl}/login.php`, { username, password });
 
-6. Membuat AuthGuard dan AutoLoginGuard
+# 6. Membuat AuthGuard dan AutoLoginGuard
    
 AuthGuard: Mencegah akses ke halaman tertentu jika pengguna belum login.
 
@@ -91,7 +91,7 @@ AutoLoginGuard: Mengarahkan pengguna yang sudah login ke halaman beranda tanpa p
     return true;
   }
 
-7. Menambahkan Guards ke Routing
+# 7. Menambahkan Guards ke Routing
    
 Di file app-routing.module.ts, tambahkan guards ke rute. Sebagai contoh:
 
@@ -100,7 +100,7 @@ Di file app-routing.module.ts, tambahkan guards ke rute. Sebagai contoh:
   { path: 'login', component: LoginPage, canActivate: [AutoLoginGuard] },
   { path: 'home', component: HomePage, canActivate: [AuthGuard] }
 
-8. Membuat Login Form dan Implementasi Logika Login
+# 8. Membuat Login Form dan Implementasi Logika Login
    
 Form Login: Pada login.page.html, tambahkan form untuk username dan password menggunakan komponen ion-input.
 Di file login.page.ts, buat fungsi login() untuk memproses data input pengguna dan mengirimkannya ke API menggunakan AuthService.
@@ -114,7 +114,7 @@ Di file login.page.ts, buat fungsi login() untuk memproses data input pengguna d
     }
   });
 
-9. Halaman Beranda dan Logout
+# 9. Halaman Beranda dan Logout
 
 Di home.page.ts, buat fungsi logout() yang akan menghapus data autentikasi dan mengarahkan pengguna kembali ke halaman login.
 
@@ -122,7 +122,7 @@ Di home.page.ts, buat fungsi logout() yang akan menghapus data autentikasi dan m
   this.authService.logout();
   this.router.navigate(['/login']);
 
-10. Ringkasan Proses Login dan Akses Rute\
+# 10. Ringkasan Proses Login dan Akses Rute\
 
 - Login: Pengguna memasukkan username dan password di form login, kemudian AuthService memvalidasi data tersebut dengan API. Jika berhasil, data autentikasi disimpan dan pengguna diarahkan ke halaman beranda.
 - Akses Rute: AuthGuard memastikan hanya pengguna yang terautentikasi yang bisa mengakses halaman beranda, sementara AutoLoginGuard memastikan pengguna yang sudah login tidak dapat kembali ke halaman login.
